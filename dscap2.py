@@ -1,6 +1,5 @@
 from lark import Lark, Transformer
 
-# 1. Define the Grammar (The "What", not the "How")
 ascap_grammar = r"""
     start: block+
 
