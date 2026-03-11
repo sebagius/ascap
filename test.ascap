@@ -1,0 +1,36 @@
+# ism-1621.ascap
+
+group ism-1621 {
+    title "ISM-1621"
+    rule ism-1621
+}
+
+rule ism-1621 {
+    version "ISM-1621-Rev-0"
+    title "ISM-1621; Revision 0"
+    description "Windows PowerShell 2.0 is disabled or removed."
+    criteria:and {
+        check win_ps2
+        check win_ps2_engine
+    }
+}
+
+check:wmi win_ps2 {
+    namespace "root\cimv2"
+    wql "SELECT installstate FROM win32_optionalfeature WHERE name = 'MicrosoftWindowsPowerShellV2Root'"
+    expect:equals {
+        field "installstate"
+        entity_check "at least one"
+        value "2"
+    }
+}
+
+check:wmi win_ps2eng {
+    namespace "root\cimv2"
+    wql "SELECT installstate FROM win32_optionalfeature WHERE name = 'MicrosoftWindowsPowerShellV2'"
+    expect:equals {
+        field "installstate"
+        entity_check "at least one"
+        value "2"
+    }
+}
