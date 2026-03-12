@@ -11,7 +11,7 @@ rule ism-1621 {
     description "Windows PowerShell 2.0 is disabled or removed."
     criteria:and {
         check win_ps2
-        check win_ps2_engine
+        check win_ps2eng
     }
 }
 
